@@ -1,0 +1,17 @@
+>This version provide a bi-directional comunication between two nodes using two different pipes to catch the Round trip
+Time of flight. To compute the distance separing the two node is giveb by a simple formule as follows :
+					D=C*ToF(2)/2
+where 	D: is the distance between the two node.
+	C: is the speed of light.
+	ToF(2):is the round trip time of flight. 
+>The code is very clean taking care of almoust all possible defective in the transmisson
+(sending,receiving, depassing the Time to leave...).
+>I spent too much time testing this code, but i faced several hardware problems (pins, cables ..), and after fixing 
+those problems the result i ended with is a distance D= 1 555 m   
+
+>Notes:
+The appropriet way to establish the communication using two pipes, is to give an adresse (pipe) to read from and 
+another adresse(pipe) to write in to a corresponding node and inversing the adresses for the other node. 
+We divide by two because ToF(2) is keeping track of the time spent between the sent and a reception in the same node
+assuming that receiving and preapring the message consume the same amount of time in the two nodes.  
+

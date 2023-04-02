@@ -1,0 +1,23 @@
+
+>In this version am using a Full-duplex pipe to get the round-tripe time of flight in order to compute the distance
+separing the two nodes.
+
+>The Code provided in the two nodes is a personal essay where i set up each of the two NRF24L+ with the same 
+giving adress of the pipe0 used to write and read in a Full_duplex mode. 
+
+
+>Conclusion:
+	This version also failed to give a valid result.. and i didn't figure out the origin of it's issue.
+	After a bunch of various tests, i decided to move on .. serach on youtube for a pre-tested code.. 
+	Until the time of writing thoses notes all bi-directional comunication i searched for are provided by two pipes.
+	So in the next version i will try the avaible topologie in the net that uses two pipes. 
+  
+
+Notes: 
+To set the pipe to support Full-duplex communication we should use the radio.setpayload(32) methode provided by the NRF 
+library   
+One more thinf to be mentioned, and as usefull a good practice, i used channel 100 (NRF offers 125 Channel From 2.400 GHz to 
+2.525 GHz with a pace of 1Mhz), menaning that am communicating with a radio frequency = 2.4100 GHz wich is chosen to avoid 
+interference with BLE and WIFI signals.
+
+   
