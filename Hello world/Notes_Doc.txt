@@ -1,0 +1,62 @@
+
+>This version is a vital application to get started with NR24L01 modules illustrating a one way communication
+with a set up of two nodes with a single pipe in between.
+
+>In this example we get familiar with the basics of the NRF libreary, hardware shema and code implementation.
+
+>The code works effeciently and i get the desired result.
+
+Notes:
+> The NRF module supports a low power supply = 3.3V.
+
+> Any tension over the metioned earlier could burnout the module.
+
+> About <SPI> module : 
+The comunication between the Arduino and the NRF module is insured with the Serial Peripheral Interace protocole.
+SPI is a full-duplex interface. During SPI communication, the data is simultaneously transmitted (shifted out serially
+onto the MOSI/SDO bus) and received (the data on the bus (MISO/SDI) is sampled or read in).
+
+The fallwoing table explaine the role of each of the 8 pins in the NRF24L01 module 
+ 
+BROCHE	SIGNIFICATION		RÔLE
+VCC	–			Alimentation du module (1,9 et 3,6 V)
+GND	–			Alimentation du module (0 V)
+SCK	Serial ClocK		Horloge communication SPI
+MISO	Master In Slave Out	Voie de communication nRF24 -> arduino
+MOSI	Master Out Slave In	Voie de communication arduino -> nRF24
+CE	Chip Enable		Active le mode RX ou TX (émission / réception)
+CSN	Chip Select Not		Active le module nRF24, lorsque mis à la masse (port SPI)
+IRQ	Interrupt ReQuest	Permet d’interagir avec un microcontrôleur, si besoin 
+
+> About <NRF24> library : https://github.com/nRF24/RF24/blob/master/RF24.h
+RF24 radio(pinCE, pinCSN);    			// Instanciation du NRF24L01 (set pinCE and CSN to any digital pin in the arduino)
+radio.setPALevel(RF24_PA_MIN);      		// Sélection d'un niveau "MINIMAL" pour communiquer (pas besoin d'une forte puissance, pour nos essais)
+radio.setChannel(n° channal);			// Spécifier une channal de transmission (125 channal disponible de 2.4 GHz à 2.525 GHz)
+radio.setPayload(taille en bit<=32)		// Spécifier la taille du trame 
+radio.openWritingPipe(adresse);     		// Ouverture du tunnel en ÉCRITURE, avec le "nom" qu'on lui a donné (adresse sur 5bits)
+radio.stopListening();              		// Arrêt de l'écoute du NRF24 (signifiant qu'on va émettre, et non recevoir, ici)
+radio.write(&message, sizeof(message));     	// Envoi de notre message
+radio.openReadingPipe(0, adresse);  		// Ouverture du tunnel en LECTURE, avec le "nom" qu'on lui a donné
+radio.startListenig();              		// Arret de l'envoie du NRF24 (on va receoir)
+radio.available()				// Verifier si on a un message a lire dans le pipe
+radio.read(&message, sizeof(message));		// Si un message vient d'arriver, on le charge dans la variable "message"
+
+> Another adjustable parameter with the nRF24L01 chips is the signal level.
+ In fact, you can choose between several possible transmission strengths, ranging from very weak to very strong.
+ And whether you have a built-in antenna or an external antenna will make all the difference, if you're looking 
+ to carry far.
+
+ Also note that some nRF24s have amplifiers, marked "PA". So if you see "NRF24L01 PA LNA" on your radio module,
+ then you know that this is a model with a signal power amplifier (PA stands for "Power Amplification"). With the LNA,
+ which stands for "Low Noise Amplifier", you will have one of the best transceivers available, as it is very 
+ powerful, but at the same time it is as insensitive as possible to environmental disturbances.
+
+ Concerning our NRF24L01, here are some power ratio values that I could find 
+	-MINIMAL
+	-BAS
+	-HAUT
+	-MAXIMAL
+
+> To avoid any disfunction a supply tesion regulation is a must, and it's varay with the mentioned power ratio as follows:
+	-MINIMAL,BAS : stabilization using a capacitor (10 to 100 Micro F)
+	-HAUT,MAXIMAL : Power supply regulator module for NRF24L01+ 

@@ -25,7 +25,7 @@ void setup() {
 
 void loop() {
   // On vérifie à chaque boucle si un message est arrivé
-  if (radio.available()) {
+  if () {
     radio.read(&message, sizeof(message));                        // Si un message vient d'arriver, on le charge dans la variable "message"
     Serial.print("Message recieved : "); Serial.println(message);     // … et on l'affiche sur le port série !
   }
