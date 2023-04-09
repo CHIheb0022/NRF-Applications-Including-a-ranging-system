@@ -6,7 +6,7 @@ with a set up of two nodes with a single pipe in between.
 
 >The code works effeciently and i get the desired result.
 
-Notes:
+**Notes:**
 > The NRF module supports a low power supply = 3.3V.
 
 > Any tension over the metioned earlier could burnout the module.
