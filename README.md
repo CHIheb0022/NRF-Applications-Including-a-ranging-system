@@ -8,3 +8,8 @@
  - Method 2 : using the two way ranging (TWR) technique. it's a request/responde comunication over a pre-configured pipe supporting Full-duplex transmission.
 
 ![TWR illustration:](TWR.png)
+
+# Curent tests:
+
+Am curently trying to include freeRtos functionalities to provide more effeciency in termms of delays to ensure correct calculation and to monitore variants tasks.
+
